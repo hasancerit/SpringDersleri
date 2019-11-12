@@ -8,6 +8,7 @@ import guru.springframework.services.GreetingService;
 @org.springframework.stereotype.Controller
 public class Controller {
 	@Autowired
+	@Qualifier("GetterGreetingService")
     private GreetingService greetingService;
 	
 	public String sayHello() {

@@ -1,5 +1,5 @@
 package guru.springframework.petclinic.PetClinic.model;
 
-public class Pet {
+public class Pet extends Person{
 
 }

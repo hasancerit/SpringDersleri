@@ -13,7 +13,7 @@ public class VetController {
 	@Autowired
 	VetService vetService;
 	
-	@GetMapping({"/vets/index.html","/vets/index","/vets"})
+	@GetMapping({"/vets/index.html","/vets/index","/vets","vets.html"})
 	public String listVets(Model model){
 		model.addAttribute("vets",vetService.findAll());
 		return "vets/index";

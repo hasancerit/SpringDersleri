@@ -3,46 +3,23 @@
   </head>
   <body>
   
-    <div th:inclue="fragments/header :: header ('Hasan','Cerit')">
-      <div class="navbar navbar-inverse navbar-fixed-top">
+    <div th:replace="fragments/header :: header (${isim})">
+    <div style="color:Gray; font-family:Arial, Helvetica, sans-serif " >
       	Static Data
-      </div>
-      
-      <div>
-      	Static Data 2
-      </div>
+      </div> 
     </div>
-    
     <hr>
     
-     <div>
-      <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">Static header</a>
-          </div>
-          <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Home</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    
-    <div class="container">
-      <div class="hero-unit">
-        <h1>Test</h1>
-        <p>
-          Welcome to the Spring MVC Quickstart application!
-          Get started quickly by signing up.
-        </p>
-        <p>
-          <a href="/signup" th:href="@{/signup}" class="btn btn-large btn-success">Sign up</a>
-        </p>
-      </div>
-      <div th:replace="fragments/footer :: footer">&copy; 2016 The Static Templates</div>
-    </div>
+    <!-- /* The markup with breadcrumb class will be passed to the header fragment */-->
+    <!-- /*Class'i asd olan elementler(task/layout icinde arýyoruz), header parametresi olarak headera gecer */ -->
+	<header th:insert="task/layout :: header(~{task/layout  :: .asd})" id="headerId">
+		Default Header
+	</header>
+	
+    <hr>
+    <div id = "disfooter" th:insert="${isAdmin} ? ~{fragments/footer :: 'footer-admin'} : ~{fragments/footer :: 'footer-kullanici'}" 
+    										style="color:red; font-family:'Comic Sans MS','cursive','sans-serif' ">
+ 		 &copy; 2016 The Static Templates
+	</div>
   </body>
 </html>

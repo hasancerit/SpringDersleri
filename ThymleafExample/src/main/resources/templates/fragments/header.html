@@ -3,9 +3,10 @@
  <head>
 </head>
   <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header(isim,soyisim)">
-      <div class="navbar navbar-inverse navbar-fixed-top">
-      	Fragment Data
+    <div th:fragment="header(isim)" >
+      <div style="color:Tomato; font-family:'Comic Sans MS','cursive','sans-serif' " >
+      <span th:text="'Hosgeldin '+ ${isim}">Test</span>
+      	
       </div> 
     </div>
   </body>

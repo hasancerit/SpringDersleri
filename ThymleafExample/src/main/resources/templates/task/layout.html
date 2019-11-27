@@ -1,0 +1,14 @@
+
+		<!--/* Header fragment */-->
+		<div th:fragment="header(breadcrumb)" id="fragmentDivId">
+		    <ol th:replace="${breadcrumb}" id="fragmentOlId">
+		        <li id="fragmentLi1Id"><a href="#">Home Ic</a></li> <!-- Bu Li render edilmeyecek -->
+		        <!-- Eger Parametre olarak _ gelirse, bunun anlamý, replace'i gecersiz kýl, bu ol ve li'yi render et.-->
+		    </ol>
+		</div>
+		
+			
+		<ol class="asd container" id="headerOlId">
+		        <li id="headerLi1Id"><a href="#">Home</a></li>
+		        <li id="headerLi2Id"><a href="#" th:href="@{/task}">Tasks</a></li>
+		</ol>

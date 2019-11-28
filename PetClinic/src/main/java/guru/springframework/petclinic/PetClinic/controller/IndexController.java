@@ -16,4 +16,9 @@ public class IndexController {
 		System.out.println("List:"+ownerService.findAll().toString());
 		return "index";
 	}
+	
+	@GetMapping("/oups")
+	public String oupsHandler() {
+		return "notimplemented";
+	}
 }

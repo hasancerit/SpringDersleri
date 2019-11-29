@@ -1,4 +1,4 @@
-package guru.springframework.RecipeApp;
+package guru.springframework.RecipeApp.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,8 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
-
-import guru.springframework.RecipeApp.model.Recipe;
 
 @Entity
 public class Notes {
@@ -19,7 +17,7 @@ public class Notes {
 	@Lob
 	private String recipeNotes;
 	
-	@OneToOne()
+	@OneToOne
 	private Recipe recipe;
 
 	public long getId() {

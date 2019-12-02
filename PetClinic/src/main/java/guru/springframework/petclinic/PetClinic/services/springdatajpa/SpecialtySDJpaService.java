@@ -17,12 +17,9 @@ public class SpecialtySDJpaService implements SpecialityService{
 	
 	SpecialtyRepository specialtyRepository;
 	
-	@Autowired 
-	public SpecialtyRepository getSpecialtyRepository() {
-		return specialtyRepository;
-	}
-
-	public void setSpecialtyRepository(SpecialtyRepository specialtyRepository) {
+	@Autowired
+	public SpecialtySDJpaService(SpecialtyRepository specialtyRepository) {
+		super();
 		this.specialtyRepository = specialtyRepository;
 	}
 
@@ -42,7 +39,8 @@ public class SpecialtySDJpaService implements SpecialityService{
 	@Override
 	public Speciality save(Speciality object) {
 		// TODO Auto-generated method stub
-		return specialtyRepository.save(object);
+		Speciality speciality = specialtyRepository.save(object);
+		return speciality;
 	}
 
 	@Override

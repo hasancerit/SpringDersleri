@@ -3,6 +3,7 @@ package guru.springframework.petclinic.PetClinic.services.map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import guru.springframework.petclinic.PetClinic.model.Owner;
@@ -15,6 +16,7 @@ import guru.springframework.petclinic.PetClinic.services.PetTypeService;
 //Owner Service Interface'i kullanarak metodları tanımladık.
 //Bütün imp'lerde ayrı ayrı aynı kodları yazmak yerine, AbstractMapService'de yazdığımız kodları kullandık.
 @Service
+@Profile({"default","map"})
 public class OwnerServiceMap extends AbstractMapService<Owner,Long>  implements OwnerService{
 	
 	//Repo ile bir DB'ye baglanmak yerine, Service'de Map ile tuttuk(Abstract Map Service'den override edilen map)

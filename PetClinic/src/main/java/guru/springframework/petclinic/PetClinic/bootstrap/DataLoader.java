@@ -11,10 +11,12 @@ import guru.springframework.petclinic.PetClinic.model.Pet;
 import guru.springframework.petclinic.PetClinic.model.PetType;
 import guru.springframework.petclinic.PetClinic.model.Speciality;
 import guru.springframework.petclinic.PetClinic.model.Vet;
+import guru.springframework.petclinic.PetClinic.model.Visit;
 import guru.springframework.petclinic.PetClinic.services.OwnerService;
 import guru.springframework.petclinic.PetClinic.services.PetTypeService;
 import guru.springframework.petclinic.PetClinic.services.SpecialityService;
 import guru.springframework.petclinic.PetClinic.services.VetService;
+import guru.springframework.petclinic.PetClinic.services.VisitService;
 import guru.springframework.petclinic.PetClinic.services.map.OwnerServiceMap;
 import guru.springframework.petclinic.PetClinic.services.map.VetServiceMap;
 
@@ -24,14 +26,17 @@ public class DataLoader implements CommandLineRunner {
 	private VetService vetService;
 	private PetTypeService petTypeService;
 	private SpecialityService specialityService;
+	private VisitService visitService;
+	
 	
 	@Autowired
 	public DataLoader(OwnerService ownerService, VetService vetService,PetTypeService petTypeService,
-						SpecialityService specialityService) {
+						SpecialityService specialityService,VisitService visitService) {
 		this.ownerService = ownerService;
 		this.vetService = vetService;
 		this.petTypeService = petTypeService;
 		this.specialityService = specialityService;
+		this.visitService = visitService;
 	}
 
 	//Spring Context tamamen olustugunda cağirigilir
@@ -85,6 +90,12 @@ public class DataLoader implements CommandLineRunner {
 		pet2.setName("Boncuk");
 		owner2.getPets().add(pet2);
 		ownerService.save(owner2);
+		
+		/* Visit */
+		Visit catVisit = new Visit();
+		 catVisit.setPet(pet2);
+		 catVisit.setDate(LocalDate.now());
+		 catVisit.setDescription("Sneezy Kitty");
 		
 		/* Speciality */
 		Speciality radiology = new Speciality();

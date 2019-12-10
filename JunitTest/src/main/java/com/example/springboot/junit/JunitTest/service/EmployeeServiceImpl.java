@@ -39,4 +39,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public String deneme() {
 		return "Service İci deneme";
 	}
+	
+	public String ozelMetod() {
+		return "Özel Metod";
+	}
 }

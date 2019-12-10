@@ -13,9 +13,11 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.jsf.FacesContextUtils;
 
 import com.example.springboot.junit.JunitTest.model.Employee;
 import com.example.springboot.junit.JunitTest.repository.EmployeeRepository;
+import com.example.springboot.junit.JunitTest.utils.Factory;
 
 @RunWith(SpringRunner.class)
 public class EmployeeServiceImplIntegrationTest {
@@ -47,16 +49,11 @@ public class EmployeeServiceImplIntegrationTest {
  
  */
 	
-	/*Imp mocklamaya calissam da, EmployeeService mockladı.
-	 *  Yani EmployeeServiceImpl değil, onun implements ettigi employeeService interface'i mocklandı.
-	 *  
-	 *  @MockBean
-	 *  EmployeeService employeeService --ile aynı
-	 *  
-	 *  Yani metodların ici her türlü bos olusturulur.
-	 */
 	@MockBean
 	EmployeeServiceImpl employeeService;
+	
+	@MockBean
+	Factory factory;
 	
 	@Before
 	public void setUp() {
@@ -77,5 +74,9 @@ public class EmployeeServiceImplIntegrationTest {
     	Employee sonuc3 = employeeService.getEmployeeByName("Alex");
     	 assertThat(sonuc3.getName())
          .isEqualTo("Alex");
+    	 
+    	 System.out.println("Sonuc4:"+employeeService.ozelMetod());
+    	 System.out.println("Sonuc5:"+factory.factoryMethod());
+
      }
 }

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class JokeServiceImpl implements JokeService {
 
     private final ChuckNorrisQuotes chuckNorrisQuotes;
-
+    
     
     @Autowired
     private DenemeBean denemeBean1; 
@@ -21,6 +21,7 @@ public class JokeServiceImpl implements JokeService {
     @Autowired				
     public JokeServiceImpl(ChuckNorrisQuotes chuckNorrisQuotes) {
         this.chuckNorrisQuotes = chuckNorrisQuotes;
+        System.out.println("JokeServiceImpl OLUSTU");
     }
 
     @Override

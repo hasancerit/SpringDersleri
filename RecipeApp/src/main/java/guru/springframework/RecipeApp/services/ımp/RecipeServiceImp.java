@@ -18,7 +18,7 @@ public class RecipeServiceImp implements RecipeService{
 	public RecipeServiceImp(RecipeRepository recipeRepository) {
 		this.recipeRepository = recipeRepository;
 	}
-
+		
 
 	@Override
 	public Set<Recipe> getRecipes() {

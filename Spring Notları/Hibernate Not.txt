@@ -1,0 +1,25 @@
+									Hibernate
+
+								      Auto-DDL Ayarý
+Create ise	
+	Tablolar, program her çlaýþtýðýnda silinip tekrar oluþturulacaðý için
+	entity'deki her deðiþiklik kaydolur.
+
+Update ise
+	1-(Create)Tablo hiç oluþmadý ise Create gibi davranýr. Entity'deki her deðiþiklik tabloya yansýr
+	
+	2-(Update)Tablo oluþtu ise entity tarafý kýsýtlanýr. 
+		 Hiç bir þey silinemez(column,index,unique key vs.)
+		 length,columnname gibi degerler degistirilemez.(Diyelim ki valuesu "isim" olan bir column valuesunu "name" yaptýk. Tabloya "name" adýnda bir 
+								column eklenir fakat "isim" columnu silinmez)
+	  	 Fakat tabloya ekleme yapýabilir. Column index uniqekey vs eklenebilir.(Ekleme olayý da bazen kýsýtlý.örn Uniqekey eklemek için column(unique = true) 
+										  kullanýrsak key eklenmiyor, fakat table attr kullanýrsak key ekleniyor.
+										  Bir bakýma entity'de kullanýlan anntlar ve  attrler , create edilirken kullanýlacak
+										  ve update edilirken kullanýlacak gibi ayrýlmýþ durumda.)
+
+
+Özet: Create ise entity'deki her deðiþiklik aynen yansýr. 
+      Update(2) ise önceden oluþan  hiç bir þey silinemez, degerleri deðiþtirilemez, fakat column,key vb. eklenebilir(Burda da, bazý anatosyanlar ve attrler kýsýtlýdýr.)
+
+
+

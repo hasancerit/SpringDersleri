@@ -1,0 +1,60 @@
+{\rtf1\ansi\ansicpg1254\deff0\nouicompat{\fonttbl{\f0\fnil Consolas;}{\f1\fnil\fcharset162 Calibri;}{\f2\fnil\fcharset238 Calibri;}{\f3\fnil\fcharset162 Consolas;}{\f4\fnil\fcharset238 Consolas;}{\f5\fnil\fcharset0 Calibri;}{\f6\fnil\fcharset0 Consolas;}}
+{\colortbl ;\red187\green181\blue41;\red169\green183\blue198;\red106\green135\blue89;\red204\green120\blue50;\red255\green198\blue109;\red104\green151\blue187;\red152\green118\blue170;\red255\green0\blue0;\red208\green208\blue255;\red128\green128\blue128;}
+{\*\generator Riched20 10.0.18362}\viewkind4\uc1 
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1\cf1\f0\fs20\lang31 @GetMapping\cf2 (\cf3 "test/\{st\}"\cf2 )\line\cf4 public \cf2 ResponseEntity<List<Movie>> \cf5 test\cf2 (\cf1 @PathVariable \cf2 String st)\{\line     \cf4 if \cf2 (st.equalsIgnoreCase(\cf3 "1"\cf2 ))\{\line         \cf4 throw new \cf2 EntityNotFoundException(\cf3 "Custom Msg"\cf2 )\cf4 ;\line     \cf2\}\line     \cf4 else if\cf2 (st.equalsIgnoreCase(\cf3 "2"\cf2 ))\{\line         \cf4 throw new \cf2 DirectorIdNotFoundException(\cf3 "Custom Msg"\cf2 )\cf4 ;\line     \cf2\}\line     \cf4 else if\cf2 (st.equalsIgnoreCase(\cf3 "3"\cf2 ))\{\line         \cf4 int \cf2 i = \cf6 1\cf2 /\cf6 0\cf4 ;\line     \cf2\}\line     \cf4 return new \cf2 ResponseEntity<List<Movie>>(\cf7 movieService\cf2 .getAll()\cf4 ,\cf2 HttpStatus.\cf7\i OK\cf2\i0 )\cf4 ;\line\cf2\}\par
+\par
+
+\pard\sa200\sl276\slmult1\cf0\f1\fs22\lang1055\par
+\cf8 1 Gelirse Default hata f\f2\u305?\f1 rlat. (Mesaj\f2\u305?\f1  de\f2\u287?\f1 i\f2\'ba\f1 tirebiliyoruz)\par
+\cf0\i\tab Sat Oct 19 19:29:47 EET 2019\tab\tab\tab\tab\tab\tab\tab\tab There was an unexpected error (type=Internal Server Error, status=500).\tab\tab Custom Msg\par
+\par
+\par
+\par
+\cf8\i0 2 Gelirse Custom hata f\f2\u305?\f1 rlar.ResponseStatus 2. Kullan\f2\u305?\f1 m (Mesaj\f2\u305?\f1  ve statusu de\f2\u287?\f1 i\f2\'ba\f1 tirebiliyoruz)\par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1\cf1\f0\fs20 @ResponseStatus\cf2 (HttpStatus.\cf7\i I_AM_A_TEAPOT\cf2\i0 )\f3 //Response Status 2.Kullan\f4\u305?\f3 m (Not defteri)\f0\line\cf4 public class \cf2 DirectorIdNotFoundException \cf4 extends \cf2 RuntimeException \{\line     \cf4 public \cf5 DirectorIdNotFoundException\cf2 (String msg)\{\line         \cf4 super\cf2 (msg)\cf4 ;\line     \cf2\}\line\}\par
+
+\pard\sa200\sl276\slmult1\cf0\i\f1\fs22\tab\f5\lang31 Sat Oct 19 19:31:11 EET 2019\f1\lang1055\tab\tab\tab\tab\tab\tab\tab               \tab T\f5\lang31 here was an unexpected error \f1\lang1055  (type=I'm a teapot, status=418).\tab\tab\tab\tab\f5\lang31 Custom Msg\par
+\par
+\par
+\par
+\cf8\i0\f1\lang1055 3 Gelirse spring default hata f\f2\u305?\f1 rlat\f2\u305?\f1 r ve hi\f5\lang1033\'e7\f1\lang1055  bir \f2\'ba\f1 eyi de\f2\u287?\f1 itiremeyiz.\par
+\cf0\i\tab Sat Oct 19 19:33:05 EET 2019.\tab\tab\tab\tab\tab\tab                              \tab There was an unexpected error (type=Internal Server Error, status=500).\tab\tab\tab / by zero\par
+\par
+\f5\lang31\par
+\par
+\cf8\i0\f1\lang1055 Response Status 2. kullan\f2\u305?\f1 m\f2\u305?\f1   (Mesaj\f2\u305?\f1  ve statusu de\f2\u287?\f1 i\f2\'ba\f1 tirebiliyoruz)\cf0\i\f5\lang31\par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1\cf1\i0\f0\fs20 @ResponseStatus\cf2 (\cf9 value \cf2 = HttpStatus.\cf7\i I_AM_A_TEAPOT\cf4\i0 , \cf9 reason \cf2 = \cf3 "\f3\lang1055 Custom msg\f6\lang31 "\cf2 )\f3\lang1055  \f6\lang31\line\cf1 @GetMapping\cf2 (\cf3 "/allmovies"\cf2 )\line\cf4 public \cf2 ResponseEntity<List<Movie>> \cf5 allMovie\cf2 () \{\cf4\line     return new \cf2 ResponseEntity<List<Movie>>(\cf7 movieService\cf2 .getAll()\cf4 , \cf2 HttpStatus.\cf7\i OK\cf2\i0 )\cf4 ;\line\cf2\}\cf0\i\f5\fs22\par
+
+\pard\sa200\sl276\slmult1\i0\f1\lang1055 E\f2\u287?\f1 er metod'da hairici bir hata f\f2\u305?\f1 rlat\f2\u305?\f1 lmazsa, return de\f2\u287?\f1 eri ezilir. Ve kullan\f2\u305?\f1 c\f2\u305?\f1 ya;\tab\i\tab\tab Sat Oct 19 19:37:28 EET 2019\tab\tab\tab\tab\tab\tab\tab\tab There was an unexpected error (type=I'm a teapot, status=418).\tab\tab\tab\tab\f5\lang1033\'c7\'fcnk\'fc deniz \'f6yle istedi\f1\lang31\par
+\par
+\par
+\par
+\cf8\i0\lang1055 ExceptionHandler \f5\lang1033\'fc\f1\lang1055 zerinde ResponseStatus(Mesaj\f2\u305?\f1  ve statusu de\f2\u287?\f1 i\f2\'ba\f1 tirebiliyoruz)\cf0\i\f5\lang31\par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1\cf1\i0\f0\fs20 @ResponseStatus\cf2 (\cf9 value \cf2 = HttpStatus.\cf7\i MULTI_STATUS\cf4\i0 ,\cf9 reason \cf2 = \cf3 "\f3\lang1055 Reason\f0\lang31 "\cf2 )\line\cf1 @ExceptionHandler\cf2 (\{DirectorIdNotFoundException.\cf4 class\cf2\})\line\cf4 public \cf2 String \cf5 handle\cf2 ()\{\f3\lang1055 //Response Status Kullanm 3 \cf10\tab\tab\tab\tab\tab\cf4\f0\lang31 return \cf3 "Hata Yakaland\f4\u305?"\cf4 ;\f3\lang1055  //Ge\f6\lang1033\'e7\f3\lang1055 ersiz return, (ResponseStatus ezdi)\f4\lang31\line\cf2\}\line\i\par
+
+\pard\sa200\sl276\slmult1\cf0\f1\fs22\lang1055\tab Sat Oct 19 19:58:10 EET 2019\tab\tab\tab\tab\tab\tab\tab\tab There was an unexpected error (type=Multi-Status, status=207).\tab\tab\tab MultiStatusReason\i0\par
+Burda da ResponseStatus, return de\f2\u287?\f1 erini ezdi.\i\f5\lang31\par
+\par
+\f1\lang1055 ***************************************************************************\f5\lang31\par
+\f1\lang1055 En Do\f2\u287?\f1 ru Yol:\f5\lang31\par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1\cf1\i0\f0\fs20 @ExceptionHandler\cf2 (\{DirectorIdNotFoundException.\cf4 class\cf2\})\line\cf4 public \cf2 ResponseEntity<CustomExceptionMessage> \cf5 handle\cf2 (Exception ex)\{\line     System.\cf7\i out\cf2\i0 .println(\cf3 "HATA YAKALANDI."\cf2 )\cf4 ;\line     \cf2 CustomExceptionMessage customExceptionMessage = \cf4 new \f3\lang1055\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\cf2\f0\lang31 CustomExceptionMessage()\cf4 ;\line     \cf2 customExceptionMessage.setError(\cf3 "ERROR13"\cf2 )\cf4 ;\line     \cf2 customExceptionMessage.setReason(ex.getMessage())\cf4 ;\line\line     return new \cf2 ResponseEntity<CustomExceptionMessage>(customExceptionMessage\cf4 ,\cf2 HttpStatus.\cf7\i MULTI_STATUS\cf2\i0 )\cf4 ;\line\cf2\}\par
+
+\pard\sa200\sl276\slmult1\cf0\f5\fs22\par
+\f1\lang1055 DirectorIdNotFound Ex f\f2\u305?\f1 rlat\f2\u305?\f1 l\f2\u305?\f1 rsa, bu metod tutar. D\f5\lang1033\'f6\f1\lang1055 n\f5\lang1033\'fc\f2\lang1055\'ba\f1  de\f2\u287?\f1 erini kullan\f2\u305?\f1 c\f2\u305?\f1 ya d\f5\lang1033\'f6\f1\lang1055 nd\f5\lang1033\'fc\f1\lang1055 r\f5\lang1033\'fc\f1\lang1055 r.\par
+\i\tab\tab\{"error":"ERROR13","reason":"Falan Filan"\}   Status Code: 207 \par
+\i0 **\par
+\par
+\cf8 (Geri D\f5\lang1033\'f6\f1\lang1055 n\f5\lang1033\'fc\f2\lang1055\'ba\f1  de\f2\u287?\f1 eri String olsayd\f2\u305?\f1  ve biz "Hata"  de\f2\u287?\f1 erinde bir String d\f5\lang1033\'f6\f1\lang1055 nd\f5\lang1033\'fc\f1\lang1055 rseydik)\par
+\cf0\tab\tab\tab\tab\i Hata    Status Code: 200 \par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1\i0 Yani burada ResponseEntity kullanmad\f2\u305?\u287?\u305?\f1 m\f2\u305?\f1 z i\f5\lang1033\'e7\f1\lang1055 in,custom status g\f5\lang1033\'f6\f1\lang1055 nderemedik ve spring kendisi 200 OK statusu d\f5\lang1033\'f6\f1\lang1055 nd\f5\lang1033\'fc\f1\lang1055 rd\f5\lang1033\'fc\f1\lang1055 . DirectorIdNotFound'da kulland\f2\u305?\u287?\u305?\f1 m\f2\u305?\f1 z              \cf1\f0\fs20 @ResponseStatus\cf2 (HttpStatus.\cf7\i I_AM_A_TEAPOT\cf2\i0 )\f3  \cf0\f1\fs22 annt. da i\f2\'ba\f1 e yaramad\f2\u305?\f1 . \par
+\ul Yani ExceptionHandler kullan\f2\u305?\f1 rsak, olu\f2\'ba\f1 turdu\f2\u287?\f1 umuz CustomException s\f2\u305?\f1 n\f2\u305?\f1 f\f2\u305?\f1 nda belirtti\f2\u287?\f1 imiz responsestatusler de bir i\f2\'ba\f1 e yaramaz.\par
+\par
+\b\i\par
+NOT: @ExceptionHandler Metodlar\f2\u305?\f1 n\f2\u305?\f1 , bir Controller i\f5\lang1033\'e7\f1\lang1055 ine yazarsak, sadece ordan f\f2\u305?\f1 rlat\f2\u305?\f1 lan hatalar\f2\u305?\f1  yakalayabalir. Ama @ControllerAdvice ile i\f2\'ba\f1 aretlenmi\f2\'ba\f1  bir s\f2\u305?\f1 n\f2\u305?\f1 f\f2\u305?\f1 fa yazarsak, t\f5\lang1033\'fc\f1\lang1055 m controllerlarda f\f2\u305?\f1 rat\f2\u305?\f1 lan hatalar\f2\u305?\f1  yakalar.\f5\lang31\par
+}
+ 

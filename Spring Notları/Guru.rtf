@@ -1,0 +1,116 @@
+{\rtf1\ansi\ansicpg1254\deff0\nouicompat{\fonttbl{\f0\fnil\fcharset162 Calibri;}{\f1\fnil\fcharset238 Calibri;}{\f2\fnil\fcharset0 Calibri;}{\f3\fnil Consolas;}{\f4\fnil\fcharset162 Consolas;}{\f5\fnil\fcharset238 Consolas;}{\f6\fnil\fcharset0 Consolas;}{\f7\fnil\fcharset2 Symbol;}}
+{\*\generator Riched20 10.0.18362}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\qc\b\f0\fs22\lang1055 Spring DI\par
+
+\pard\sa200\sl276\slmult1\b0 Bir Controller olu\f1\'ba\f0 turduk. Olu\f1\'ba\f0 turdu\f1\u287?\f0 umuz controller\f1\u305?\f0 , SpringBootApplication class\f1\u305?\f0  i\f2\lang1033\'e7\'e7\f0\lang1055 inden get bean ile \f2\lang1033\'e7\f0\lang1055 ekebildik.\par
+\f3\fs14\lang31 @SpringBootApplication\par
+public class DiDemoApplication \{\par
+\tab public static void main(String[] args) \{\par
+\tab\tab ApplicationContext ctx = SpringApplication.run(DiDemoApplication.class, args);\par
+\tab\tab MyController controller = (MyController) ctx.getBean("myController");\par
+\tab\tab controller.hello();\par
+\tab\}\par
+\}\par
+\ul\par
+\f4\fs22\lang1055 Bean nas\f5\u305?\f4 l olu\f5\'ba\f4 turulur ? 3 Yolu vard\f5\u305?\f4 r\par
+
+\pard{\pntext\f7\'B7\tab}{\*\pn\pnlvlblt\pnf7\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\ulnone annotating your class with the stereotype @Component annotation (or its derivatives, Controller, Rest Controller, Service ....)\par
+{\pntext\f7\'B7\tab}writing a bean factory method annotated with the @Bean annotation in a custom Java configuration class\par
+{\pntext\f7\'B7\tab}declaring a bean definition in an XML configuration file\f3\fs14\lang31\par
+
+\pard\sa200\sl276\slmult1\par
+\par
+\par
+\ul\f4\fs22\lang1055 Uygulama:\ulnone\f3\fs14\lang31\par
+
+\pard{\pntext\f7\'B7\tab}{\*\pn\pnlvlblt\pnf7\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\f4\fs22\lang1055 @Component\par
+
+\pard\li720\sa200\sl276\slmult1 class MySpringBeanClass \{\par
+    //...\par
+\}\par
+Bu daha \f6\lang1033\'e7\f4\lang1055 ok classlar\f5\u305?\f4  kendimiz yazd\f5\u305?\u287?\u305?\f4 m\f5\u305?\f4 z, beanler i\f6\lang1033\'e7\f4\lang1055 in\par
+\par
+
+\pard{\pntext\f7\'B7\tab}{\*\pn\pnlvlblt\pnf7\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 @Configuration  --> Bean tan\f5\u305?\f4 mlamak i\f6\lang1033\'e7\f4\lang1055 in mecburi\par
+
+\pard\li720\sa200\sl276\slmult1 class MyConfigurationClass \{\par
+   @Bean(name = "myBean")\par
+   public NotMyClass notMyClass() \{\par
+       return new NotMyClass();\par
+   \}\par
+\}\par
+Bu daha \f6\lang1033\'e7\f4\lang1055 ok d\f5\u305?\'ba\f4 ar\f5\u305?\f4 dan harici alaca\f5\u287?\u305?\f4 m\f5\u305?\f4 z beanler i\f6\lang1033\'e7\f4\lang1055 in, model mapper gibi.\par
+\ul\par
+@AutoWired da bu beanleri almak i\f6\lang1033\'e7\f4\lang1055 in kullan\f5\u305?\f4 l\f5\u305?\f4 r.3 \f5\'aa\f4 ekilde kullan\f5\u305?\f4 labilir.\ulnone\par
+
+\pard{\pntext\f7\'B7\tab}{\*\pn\pnlvlblt\pnf7\pnindent0{\pntxtb\'B7}}\fi-360\li1440\sa200\sl276\slmult1 @Controller\tab\tab\tab\tab\tab\tab  \tab\tab  public class MyController\{\par
+
+\pard\li1440\sa200\sl276\slmult1\tab @AutoWired\tab\tab\tab\tab\tab\tab\tab\tab MyBean myBean;\par
+
+\pard\li720\sa200\sl276\slmult1\tab\}\par
+\tab Property \f5\u304?\f4 njected\par
+\par
+
+\pard{\pntext\f7\'B7\tab}{\*\pn\pnlvlblt\pnf7\pnindent0{\pntxtb\'B7}}\fi-360\li1440\sa200\sl276\slmult1 @Controller\tab\tab\tab\tab\tab\tab  \tab\tab  public class MyController\{\tab\tab\tab\tab\tab\tab MyBean myBean;\par
+
+\pard\li1440\sa200\sl276\slmult1\tab @AutoWired\tab\tab\tab\tab\tab\tab\tab MyController(MyBean myBean)\{\par
+\tab\tab this.myBean = myBean;\par
+\tab\}\par
+
+\pard\li720\sa200\sl276\slmult1\tab\}\par
+\tab Constructor \f5\u304?\f4 njected\par
+
+\pard{\pntext\f7\'B7\tab}{\*\pn\pnlvlblt\pnf7\pnindent0{\pntxtb\'B7}}\fi-360\li1440\sa200\sl276\slmult1 @Controller\tab\tab\tab\tab\tab\tab  \tab\tab  public class MyController\{\tab\tab\tab\tab\tab\tab MyBean myBean;\par
+
+\pard\li1440\sa200\sl276\slmult1\tab @AutoWired\tab\tab\tab\tab\tab\tab\tab public void setterMyBean(MyBean myBean)\{\par
+\tab\tab this.myBean = myBean;\par
+\tab\}\par
+
+\pard\li720\sa200\sl276\slmult1\tab\}\par
+\tab Setter Metodu ile inject\par
+
+\pard\sa200\sl276\slmult1\par
+\par
+Diyelim ki bir interface'i 2 servis implements etti. Biz de bu interface'i controller'da AutoWired ile ba\f5\u287?\f4 lamaya \f6\lang1033\'e7\f4\lang1055 al\f5\u305?\'ba\f4 t\f5\u305?\f4 k. (Ya da ayn\f5\u305?\f4  tipten 2 \f6\lang1033\'f6\f4\lang1055 rne\f5\u287?\f4 i olan bir bean'i, AutoWired ile ba\f5\u287?\f4 lamaya \f6\lang1033\'e7\f4\lang1055 al\f5\u305?\'ba\f4 t\f5\u305?\f4 k). Hata al\f5\u305?\f4 r\f5\u305?\f4 z. Hatay\f5\u305?\f4  \f6\lang1033\'f6\f4\lang1055 nlemek i\f6\lang1033\'e7\f4\lang1055 in; \tab\tab\tab\tab\par
+
+\pard{\pntext\f7\'B7\tab}{\*\pn\pnlvlblt\pnf7\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 Qualifer\par
+{\pntext\f7\'B7\tab}Primary\tab (Bu ikisi eleyicidir)\tab\tab\par
+{\pntext\f7\'B7\tab}Profile\tab\tab\tab\tab\tab\tab\par
+
+\pard\sa200\sl276\slmult1\b\par
+Profile: \b0 E\f5\u287?\f4 er bir bean olu\f5\'ba\f4 tururken, profile atarsak, application.properties'de o profile'\f5\u305?\f4  aktifle\f5\'ba\f4 tirmezsek o bean yokmu\f5\'ba\f4  gibi olur. Properties'de hangi profile aktif edilirse, o bean ba\f5\u287?\f4 lan\f5\u305?\f4 r. \tab\tab\tab\tab\tab\tab  \tab\tab       E\f5\u287?\f4 er bir bean'e profile atanmad\f5\u305?\f4  ise t\f6\lang1033\'fc\f4\lang1055 m profile'larda kullab\f5\u305?\f4 labilir(?) \tab\tab\tab\tab\tab\tab\tab        Default bir profile ayarlamak i\f6\lang1033\'e7\f4\lang1055 in, bean profile ismini defaulr yapabliriz.(Bir bean'e birden fazla profile atanabilir. Dizi ile)\par
+\par
+\b Bean Ya\f5\'ba\f4 am D\f6\lang1033\'f6\f4\lang1055 ng\f6\lang1033\'fc\f4\lang1055 s\f6\lang1033\'fc\f4\lang1055 :\b0  \par
+\b SOLID:\par
+\par
+\par
+@ImportResource("asd.xml") : \b0 Conf. class\f5\u305?\f4 n \f6\lang1033\'fc\f4\lang1055 zerine yaz\f5\u305?\f4 l\f5\u305?\f4 r. asd.xml'deki beanleri contexte ekler.\par
+\par
+\b @PropertyResource("asd.properties") : \b0 Kullan\f5\u305?\f4 ld\f5\u305?\u287?\u305?\f4  classta, asd.properties i\f6\lang1033\'e7\f4\lang1055 indeki de\f5\u287?\f4 erlere \b @Value($\{username\}) \b0 ile eri\f5\'ba\f4 ilebilir.\par
+\tab application.properties i\f6\lang1033\'e7\f4\lang1055 indeki proplara eri\f5\'ba\f4 mek i\f6\lang1033\'e7\f4\lang1055 in bu anotasyona gerek yok. Direkt @Value ile eri\f5\'ba\f4 ebiliriz.\par
+\par
+\b Not:\b0 Diyelim ki application.pro i\f6\lang1033\'e7\f4\lang1055 inde deger1 = default1 ve deger2 = default2 var. application_ot.pro i\f6\lang1033\'e7\f4\lang1055 inde de deger1 = other1 var. E\f5\u287?\f4 er profile'\f5\u305?\f4  ot yaparsak, application_ot, application i\f6\lang1033\'e7\f4\lang1055 inde \ul override\ulnone  edilir(Yani application i\f6\lang1033\'e7\f4\lang1055 indekiler silinmez). Art\f5\u305?\f4 k deger1 = other1'dir, fakat deger2 silinmez ve default1 olarak kal\f5\u305?\f4 r. E\f5\u287?\f4 er application_ot i\f6\lang1033\'e7\f4\lang1055 inde deger2 = other2 gibi bi de\f5\u287?\f4 er tan\f5\u305?\f4 mlarsak, application i\f6\lang1033\'e7\f4\lang1055 indeki de\f5\u287?\f4 er2 = default2 ezilerek, deger2 = other2 olur. \tab\par
+
+\pard\li720\sa200\sl276\slmult1\par
+\f3\fs14\lang31\par
+
+\pard\sa200\sl276\slmult1\ul\b\f4\fs24\lang1055 Thymleaf Page Layouts\par
+\ulnone\fs22 Insert: \b0 Fragmenti, belirtildi\f5\u287?\f4 i tag'in i\f6\lang1033\'e7\f4\lang1055 ine yerle\f5\'ba\f4 tir.\par
+\b Replace:\b0  Fragmenti, belirtildi\f5\u287?\f4 i tag yerine yerle\f5\'ba\f4 tirir.\par
+\b\i Not:\b0\i0  Fragmenti tan\f5\u305?\f4 mlad\f5\u305?\u287?\u305?\f4 m\f5\u305?\f4 z div tag'i de, insert ya da replace edilen yere dahil edilir.\par
+\par
+\b <div th:replace="~\{fragments/header :: header\}">...</div>  \tab\b0\par
+\b <div th:replace="fragments/header :: header">...</div>  \tab\tab\tab\tab\tab\b0\fs18 File :: FragmentAdi(Params)\par
+\b\par
+Ko\f5\'ba\f4 ullu:\par
+\fs14 <div th:replace="fragments/footer :: $\{#authentication.principal.isAdmin()\} ? 'footer-admin' : 'footer'">\par
+  &copy; 2016 The Static Templates\tab\par
+</div>\par
+\par
+\par
+\par
+\par
+\f3\lang31\par
+\b0\par
+}
+ 

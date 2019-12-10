@@ -1,0 +1,86 @@
+{\rtf1\ansi\ansicpg1254\deff0\nouicompat{\fonttbl{\f0\fnil\fcharset162 Calibri;}{\f1\fnil\fcharset238 Calibri;}{\f2\fnil\fcharset0 Calibri;}{\f3\fnil Consolas;}{\f4\fnil\fcharset162 Consolas;}{\f5\fnil\fcharset0 Consolas;}{\f6\fnil\fcharset238 Consolas;}}
+{\colortbl ;\red204\green120\blue50;\red169\green183\blue198;\red187\green181\blue41;\red152\green118\blue170;\red208\green208\blue255;\red106\green135\blue89;\red128\green128\blue128;}
+{\*\generator Riched20 10.0.18362}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\qc\ul\b\i\f0\fs28\lang1055 OneToMany/ManyToOne \f1\u304?\f0 li\f1\'ba\f0 ki:\f2\lang31\par
+
+\pard\sa200\sl276\slmult1\b0\fs22 OneToMany 1 (Harici row unidirectinal):\ulnone\i0\par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1\cf1\f3\fs20 public class \cf2 Director \{\line    \f4\lang1055\tab\cf3\f3\lang31 @Id\cf2\line     \f4\lang1055\tab\cf1\f3\lang31 private \cf2 String \cf4 directorId\cf1 ;\f4\lang1055\par
+\cf3\tab\f3 @OneToMany\line\f4\tab\f3 @JoinColumn\cf2 (\cf5 name\cf2 =\cf6 "\f4 directorId\f3 "\cf2 )\line\f4\tab\cf1\f3 private \cf2 List<Movie> \cf4 movies\cf1 ;\par
+\cf2\f4\lang31\}\par
+
+\pard\sa200\sl276\slmult1\cf0\f0\fs22\lang1055 JoinColumn sahibi Director tablosu(One) olsa da ,\f2\lang31 Fk detay tablosunda\f0\lang1055 (Many)\f2\lang31  olu\f1\'baur.\par
+\par
+\ul\i OneToMany 2 (JoinTable unidirectinal):\par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1\cf1\ulnone\i0\f3\fs20 public class \cf2 Director \{\line  \f4\lang1055\tab\cf3\f3\lang31 @Id\cf2\line  \f4\lang1055\tab\cf1\f3\lang31 private \cf2 String \cf4 directorId\cf1 ;\f4\lang1055\par
+\cf3  \tab\f3\lang31 @OneToMany\line  \f4\lang1055\tab\f3\lang31 @JoinTable\cf2 (\cf5 name \cf2 = \cf6 "tableortak"\cf1 ,\line                     \cf5 joinColumns \cf2 = \{\cf3 @JoinColumn\cf2 (\cf5 name \cf2 = \cf6 "directorId"\cf2 )\}\cf1 ,\line                     \cf5 inverseJoinColumns \cf2 = \{\cf3 @JoinColumn\cf2 (\cf5 name \cf2 = \cf6 "movieId"\cf2 )\})\line\f4\lang1055\tab\cf1\f3\lang31 private \cf2 List<Movie> \cf4 movies\cf1 ;\line\cf2\}\cf0\f0\fs22\lang1055\par
+
+\pard\sa200\sl276\slmult1 Join Table kulland\f1\u305?\u287?\u305?\f0 m\f1\u305?\f0 z i\f2\lang1033\'e7\f0\lang1055 in de bu iki tabloyu ba\f1\u287?\f0 layacak tableortak tablosu olu\f1\'ba\f0 ur.\f1\lang31\par
+\f0\lang1055 -------------------------------------------------------------------------------------------------------------\f1\lang31\par
+\i (Bunlar\u305?n ayn\u305?s\u305?n\u305?, \f0\lang1055 Movie(Many) \f1\lang31 entity'de @ManyToOne kullanarak da yapabiliriz.):\par
+\ul\i0 ManyToOne 1 (Harici row unidirectinoal):\par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1\cf1\ulnone\f3\fs20 package \cf2 com.example.SpringBootApi.MovieApi.Entity\cf1 ;\line\line import \cf2 lombok.*\cf1 ;\line import \cf2 org.hibernate.annotations.\cf3 GenericGenerator\cf1 ;\line import \cf2 org.springframework.stereotype.\cf3 Controller\cf1 ;\line\line import \cf2 javax.persistence.*\cf1 ;\line import \cf2 java.util.Date\cf1 ;\line import \cf2 java.util.List\cf1 ;\line\line\line public class \cf2 Movie \{\line     \cf3 @Id\line\cf2     \cf1 private \cf2 String \cf4 movieId\cf1 ;\line\line     \cf3 @ManyToOne\cf2\line     \cf3 @JoinColumn\cf2 (\cf5 name \cf2 = \cf6 "directorId"\cf2 )\line     \cf1 private \cf2 Director director\line\}\par
+
+\pard\sa200\sl276\slmult1\cf0\f0\fs22\lang1055 Burada da FK, Movie tablosunda olu\f1\'ba\f0 ur. JC sahibi de Movie'dir.\par
+\f1\lang31\par
+\ul ManyToOne 2 (JoinTable unidirectinoal):\cf3\f3\fs20\par
+\cf1\ulnone public class \cf2 Movie \{\line     \cf3 @Id\line     \cf1 private \cf2 String \cf4 movieId\cf1 ;\line\line     \cf3 @ManyToOne\cf2 (\cf5 cascade \cf2 = \{CascadeType.\cf4\i ALL\cf2\i0\})\line     \cf3 @JoinTable\cf2 (\cf5 name \cf2 = \cf6 "tableortak"\cf1 ,\line             \cf5 joinColumns \cf2 = \{\cf3 @JoinColumn\cf2 (\cf5 name \cf2 = \cf6 "movieId"\cf2 )\}\cf1 ,\line             \cf5 inverseJoinColumns \cf2 = \{\cf3 @JoinColumn\cf2 (\cf5 name \cf2 = \cf6 "directorId"\cf2 )\}\line     )\line     \cf1 private \cf2 Director \cf4 director\cf1 ;\line\cf2\}\line\cf0\f0\fs22\lang1055 Join Table kulland\f1\u305?\u287?\u305?\f0 m\f1\u305?\f0 z i\f2\lang1033\'e7\f0\lang1055 in de bu iki tabloyu ba\f1\u287?\f0 layacak tableortak tablosu olu\f1\'ba\f0 ur.\cf2\f3\fs20\lang31\par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1\cf0\f1\fs22 (manytoone/onetomany'da fk her zaman many taraf\u305?ndaki tabloda olu\'baur)\par
+
+\pard\sa200\sl276\slmult1\par
+\ul OneToMany -- ManyToOne bidirectional:\par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1\cf1\ulnone\f3\fs20 public class \cf2 Movie \{\line     \cf3 @Id\line\cf2     \cf1 private \cf2 String \cf4 movieId\cf1 ;\line\line     \cf3 @ManyToOne\cf2\line     \cf3 @JoinColumn\cf2 (\cf5 name \cf2 = \cf6 "directorId"\cf2 )\cf7\f5\lang1033 //JoinTable ile de olabilir (Ama vt'de \f4\lang1055\tab\tab\tab\tab\tab\tab\f3\lang1033 ortak tablo olu\f6\'baur)\cf2\f3\lang31\line     \cf1 private \cf2 Director director\line\}\par
+\par
+\cf1 public class \cf2 Director \{\line    \f4\lang1055\tab\cf3\f3\lang31 @Id\cf2\line     \f4\lang1055\tab\cf1\f3\lang31 private \cf2 String \cf4 directorId\cf1 ;\f4\lang1055\par
+\cf3\tab\cf2\f3\line\f4\tab\cf3\f3 @OneToMany\cf2 (\cf5 mappedBy \cf2 = \cf6 "director"\cf2\})\line\f4\tab\cf1\f3 private \cf2 List<Movie> \cf4 movies\cf1 ;\par
+\cf2\f4\lang31\}\cf0\f1\fs22\par
+
+\pard\sa200\sl276\slmult1 Yani manytoone/onetomany bir ili\'baki bidirectional olacaksa; joinColumn\f0\lang1055 /JoinTable\f1\lang31  many taraf\u305?,mappedBy one taraf\u305?d\u305?r.\f0\lang1055 FK yine many(Movie) taraf\f1\u305?\f0 nda\f1\lang31\par
+\ul\b\i\f2\fs28\par
+\par
+\par
+
+\pard\sa200\sl276\slmult1\qc\f0\lang1055 OneToMany/ManyToOne \f2\lang31 Bidirecional \f1\u304?li\'bakilerde \f0\lang1055 save\f1\lang31  \f0\lang1055 etme :\ulnone\b0\i0\f2\fs22\lang1033\par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1\cf1\f3\fs20 public class \cf2 Movie \{\line     @Id\line     @GeneratedValue(strategy = GenerationType.AUTO\cf1 ,\cf5 generator \cf2 = \cf6 "systid"\cf2 )\line     @GenericGenerator(\cf5 name \cf2 = \cf6 "system-uuid"\cf1 ,\cf5 strategy \cf2 = \cf6 "uuid"\cf2 )\line     \cf1 private \cf2 String \cf4 movieId\cf1 ;\line\line     \cf2 @ManyToOne(cascade = \{CascadeType.ALL\})\line     @JoinColumn(\cf5 name \cf2 = \cf6 "directorId"\cf2 ) \cf7 //JoinTable ile de olabilir (Ama vt'de \f4\lang1055\tab\tab\tab\tab\tab\tab\f3\lang1033 ortak tablo olu\f6\'baur)\line     \cf1 private \cf2 Director \cf4 director\cf1 ;\line\cf2\}\line\cf7 /**/\line\cf1 public class \cf2 Director \{\line     @Id\line     @GeneratedValue(strategy = GenerationType.AUTO\cf1 ,\cf5 generator \cf2 = \cf6 "syuuid"\cf2 )\line     @GenericGenerator(\cf5 name \cf2 = \cf6 "system-uuid"\cf1 ,\cf5 strategy \cf2 = \cf6 "uuid"\cf2 )\line     \cf1 private \cf2 String \cf4 directorId\cf1 ;\line\line     \cf2 @OneToMany(\cf5 mappedBy \cf2 = \cf6 "director"\cf1 ,\cf2 cascade = \{CascadeType.ALL\})\line     \cf1 private \cf2 List<Movie> \cf4 movies\cf1 ;\line\cf2\}\cf0\f2\fs22\par
+
+\pard\sa200\sl276\slmult1\ul Movie Tablosu \ulnone\f0\lang1055\tab                \f2\lang1033  \f0\lang1055                                                     \ul\f2\lang1033 Director Tablosu\par
+\ulnone     \f0\lang1055    \f2\lang1033  Id\tab\tab\tab   \f0\lang1055                                                                \f2\lang1033    I\f0\lang1055 d                                              \f2\lang1033 directorId\par
+\par
+\ul\b Onetomany/manytoone bid. ili\f1\'bakide joinColumn\f0\lang1055 /Join Table\f1\lang1033  \f0\lang1055 taraf\f1\u305?\f0 ndan save etmek:\cf2\ulnone\b0\f2\fs20\lang1033\line\f3 Movie \cf4 movie \cf2 = \cf1 new \cf2 Movie()\cf1 ; \line\cf4 movie\cf2 .setName(\cf6 "Hasan\f6\u305?n Filmi 1"\cf2 )\cf1 ;\line\cf4 movie\cf2 .setDescription(\cf6 "\f5\'c7okzel Film"\cf2 )\cf1 ;\line\cf7 //Movie Olusturduk\line\line\cf2 Director \cf4 director \cf2 = \cf1 new \cf2 Director()\cf1 ;\line\cf4 director\cf2 .setName(\cf6 "Hasan"\cf2 )\cf1 ;\cf0\ul\b\f0\fs22\lang1055\par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1\cf1\ulnone\b0\f5\fs20\lang1033\line\cf4 movie\cf2 .setDirector(\cf4 director\cf2 )\cf1 ;\line\cf7 //Director Olusturduk\line\line\cf2 movieService.addMovie(\cf4 movie\cf2 )\cf1 ;\par
+
+\pard\sa200\sl276\slmult1\cf0\f2\fs22 //Sadece Movie'yi \f0\lang1055 save ettik\f2\lang1033 . Ama @ManyToOne(cascade = \{CascadeType.ALL\}) oldugu icin director da eklendi.\b\f0\lang1055                                                                                                      movie.setDirector(director) \b0 yapmam\f1\u305?\f0 z yeterli oldu. \b                                                                                                                         director.setMovies(new HashSet<Movie>().add(movie)) \b0 yapmam\f1\u305?\f0 za gerek kalmad\f1\u305?\f0 .         \b Yani save etti\f1\u287?\f0 imiz nesneye, di\f1\u287?\f0 er nesneyi eklememiz yeterli oldu.\b0  \par
+Movie tablosuna, id = 1a2b, name= Hasan\f1\u305?\f0 n Filmi 1,desc=\f2\lang1033\'e7\f0\lang1055 okzel film\b ,directorId = 2a3c\b0   \tab  Director Tablosuna id = 2a3c, name =Hasan                               Eklendi\par
+\par
+\ul\b\f2\lang1033 Onetomany/manytoone bid. ili\f1\'bakide \f0\lang1055 mappedBy \f1\lang1033 taraf\u305?ndan \f0\lang1055 save etmek\f1\lang1033 ;\f0\lang1055  \par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1\cf2\ulnone\b0\fs20  \f3 Director director = \cf1 new \cf2 Director()\cf1 ;\line\cf2 director.setName(\cf6 "Onur"\cf2 )\cf1 ;\line\line\cf2 List<Movie> movies = \cf1 new \cf2 ArrayList<>()\cf1 ;\line\cf2 Movie movie = \cf1 new \cf2 Movie()\cf1 ;\line\cf2 movie.setName(\cf6 "Onurun Filmi"\cf2 )\cf1 ;\line\cf2 movies.add(movie)\cf1 ;\line\line\cf2 director.setMovies(movies)\cf1 ;\f4  //Save edilen nesneye di\f6\u287?\f4 er nesneyi kaydettik\f3\line\cf2\ul movie.setDirector(director)\cf1 ;\f4 //Di\f6\u287?\f4 er nesneye de save edilen nesneyi kydttk.\cf7\ulnone\f3\line\cf4 directorService\cf2 .addDirector(director)\cf1 ;\line return \cf6 ""\cf2 +movie.getIdm()\cf1 ;\par
+\cf0\f0\fs22 Burda da sadece Director'u save ettik.\f2\lang1033 . Ama @ManyToOne(cascade = \{CascadeType.ALL\})oldugu icin \f0\lang1055 movie\f2\lang1033  d\f0\lang1055 e\f2\lang1033  eklendi\f0\lang1055 .                                                                                                      \b director.setMovies(movies) \b0 yapmam\f1\u305?\f0 z\f1\u305?\f0 n yan\f1\u305?\f0 nda                             \tab  \b movie.setDirector(director) \b0 de yapt\f1\u305?\f0 k.                \tab\tab\tab\tab\tab\tab  \tab   \b Yani save edilen etti\f1\u287?\f0 imiz nesneye, di\f1\u287?\f0 er nesneyi ekledi\f1\u287?\f0 imiz gibi, di\f1\u287?\f0 er nesneye de save etti\f1\u287?\f0 imiz nesneyi eklememiz gerekli.\par
+\b0 Movie tablosuna, id = 2a3f, name= Onurun Filmi 1,desc=\f2\lang1033\'e7\f0\lang1055 okzel film,\b directorId = 6a2c  \tab  \b0 Director Tablosuna id = 6a2c, name =Onur                               Eklendi\par
+\par
+E\f1\u287?\f0 er \b movie.setDirector(director) \b0 yapmasayd\f1\u305?\f0 k. Yani di\f1\u287?\f0 er nesneye, save edilen nesneyi eklemeseydik.\par
+Movie tablosuna, id = 2a3f, name= Onurun Filmi 1,,desc=\f2\lang1033\'e7\f0\lang1055 okzel film,\b directorId = null\b0\tab  Director Tablosuna id = 6a2c, name =Onur                               Eklenecekti.\par
+Yani ayr\f1\u305?\f0  ayr\f1\u305?\f0  2 nesne de eklenecekti. Fakat biribirine ba\f1\u287?\f0 lanmayacakt\f1\u305?\f0 ()\f2\lang1033\'c7\'fc\f0\lang1055 nk\f2\lang1033\'fc\f0\lang1055  JC/JT traf\f1\u305?\f0 na eklemedik.\par
+Yani bid. ili\f1\'ba\f0 kide hangi taraftan eklersek ekleyelim, JC/JT sahibi taraf nesneyi eklemeliyiz. Elemanlar aras\f1\u305?\f0  ili\f1\'ba\f0 kiyi JC/JT taraf\f1\u305?\f0  sa\f1\u287?\f0 lar.JC/JT taraf\f1\u305?\f0 ndaki alt nesneye ekleme yap\f1\u305?\f0 lmad\f1\u305?\u287?\u305?\f0  s\f2\lang1033\'fc\f0\lang1055 rece ili\f1\'ba\f0 ki kurulamaz.\par
+
+\pard\sa200\sl276\slmult1\par
+\par
+\par
+\par
+\par
+\par
+\par
+Persist: Transient --> Persistent\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab Yeni Nesne d\f2\lang1033\'f6\f0\lang1055 nd\f2\lang1033\'fc\f0\lang1055 rmez. \tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+\par
+\par
+\par
+\f2\lang1033\par
+\f0\lang31\par
+}
+ 

@@ -1,0 +1,14 @@
+Ýnterceptors ** 
+Form Validation
+Hibernate ?
+Relations
+Thymleaf ? 
+Spring yaþam döngüsü, Controllerlar nasýl oluþur,Controllerda bir list oluþturmak ve atamak **
+Spring Bean mantýðý **
+Api exception kontrolü **
+RestTemplate ?
+Scheduling
+Twilio ?
+
+Actuatör-AdminServer-AdminClient
+Swagger

@@ -1,0 +1,9 @@
+Spring Boot
+Spring MVC  // EKÝM-KASIM-ARALIK
+HTML-CSS-JS // OCAK-ÞUBAT
+Java 8	    //MART
+Jax-rs      // NÝSAN (?)
+            //MAYIS-HAZÝRAN
+
+Hibernate-Ajax aðýrlýklý Spring web projeler
+

@@ -1,0 +1,23 @@
+							   @ResponseStatus ile Status ve Cevap Ayarlamak
+					
+							    Controller Metod üstünde kullanılırsa;
+@ResponseStatus(value = HttpStatus.I_AM_A_TEAPOT, reason = "Çünkü deniz öyle istedi")		
+Eğer metod başarı ile tamamlandıysa (Herhangi bir hata fırlatılmadıysa), Statusu gönderir.
+Return değerini override eder.
+
+
+								Özel Exception Class'ı içinde:
+@ResponseStatus(HttpStatus.I_AM_A_TEAPOT) //Spring bu hatayı yakaladığında, cevap olarak bu statusu gönderir.
+public class DirectorIdNotFoundException extends RuntimeException {
+    public DirectorIdNotFoundException(String msg){
+        super(msg);
+    }
+}
+
+
+
+	
+		
+		
+
+		 

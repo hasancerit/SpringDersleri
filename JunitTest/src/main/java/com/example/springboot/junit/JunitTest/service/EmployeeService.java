@@ -8,4 +8,9 @@ public interface EmployeeService {
 	public Employee getEmployeeByName(String name);
 
 	public List<Employee> getAllEmployees();
+	
+	public String test();
+	
+	public String deneme();
+
 }

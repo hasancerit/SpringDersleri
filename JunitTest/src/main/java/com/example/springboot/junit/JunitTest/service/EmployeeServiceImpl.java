@@ -16,7 +16,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 
 	@Override
 	public Employee getEmployeeByName(String name) {
-		System.out.println("Find By Name");
+		System.out.println("Find By Name"+employeeRepository.getClass());
 	      return employeeRepository.findByName(name);
 	}
 	
@@ -28,5 +28,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public List<Employee> getAllEmployees() {
 		System.out.println("Get All Employees");
 		return employeeRepository.findAll();
+	}
+
+	@Override
+	public String test() {
+		return "Service ici test";
+	}
+
+	@Override
+	public String deneme() {
+		return "Service İci deneme";
 	}
 }

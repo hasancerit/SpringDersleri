@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -18,7 +19,13 @@ import com.example.springboot.junit.JunitTest.repository.EmployeeRepository;
 
 @RunWith(SpringRunner.class)
 public class EmployeeServiceImplIntegrationTest {
-	
+/*
+    @Autowired
+    private EmployeeService employeeService;
+ 
+    @MockBean//Sahte bir EmployeeRepositoryImp olusturdu
+    private EmployeeRepository employeeRepository;
+    
 	@Before
 	public void setUp() {
 	    Employee alex = new Employee("alex");
@@ -38,18 +45,37 @@ public class EmployeeServiceImplIntegrationTest {
         }
     }
  
-    @Autowired
-    private EmployeeService employeeService;
- 
-    @MockBean//Sahte bir repoImp olusturdu
-    private EmployeeRepository employeeRepository;
- 
+ */
+	
+	/*Imp mocklamaya calissam da, EmployeeService mockladı.
+	 *  Yani EmployeeServiceImpl değil, onun implements ettigi employeeService interface'i mocklandı.
+	 *  
+	 *  @MockBean
+	 *  EmployeeService employeeService --ile aynı
+	 *  
+	 *  Yani metodların ici her türlü bos olusturulur.
+	 */
+	@MockBean
+	EmployeeServiceImpl employeeService;
+	
+	@Before
+	public void setUp() {
+	    Mockito.when(employeeService.test())
+	      .thenReturn("Test ici test"); 
+	    
+	    Mockito.when(employeeService.deneme())
+	    	.thenReturn("Test İci Deneme");
+	    	    
+	    Mockito.when(employeeService.getEmployeeByName("Alex")).thenReturn(new Employee("Alex"));
+	}
+	
     @Test
     public void whenValidName_thenEmployeeShouldBeFound() {
-        String name = "alex";
-        Employee found = employeeService.getEmployeeByName(name);
-      
-         assertThat(found.getName())
-          .isEqualTo(name);
+    	System.out.println("Sonuc1:"+employeeService.test());
+    	System.out.println("Sonuc2:"+employeeService.deneme());
+    	
+    	Employee sonuc3 = employeeService.getEmployeeByName("Alex");
+    	 assertThat(sonuc3.getName())
+         .isEqualTo("Alex");
      }
 }

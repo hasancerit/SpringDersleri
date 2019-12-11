@@ -21,7 +21,7 @@ import com.example.springboot.junit.JunitTest.utils.Factory;
 
 @RunWith(SpringRunner.class)
 public class EmployeeServiceImplIntegrationTest {
-/*
+
     @Autowired
     private EmployeeService employeeService;
  
@@ -47,8 +47,8 @@ public class EmployeeServiceImplIntegrationTest {
         }
     }
  
- */
-	
+ 
+/*	
 	@MockBean
 	EmployeeServiceImpl employeeService;
 	
@@ -77,6 +77,6 @@ public class EmployeeServiceImplIntegrationTest {
     	 
     	 System.out.println("Sonuc4:"+employeeService.ozelMetod());
     	 System.out.println("Sonuc5:"+factory.factoryMethod());
-
      }
+     */
 }

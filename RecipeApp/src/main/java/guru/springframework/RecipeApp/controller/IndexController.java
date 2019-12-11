@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import guru.springframework.RecipeApp.services.RecipeService;
 
 @Controller
-public class IndexController {
+public class IndexController{
 	private RecipeService recipeService;
 
 	@Autowired

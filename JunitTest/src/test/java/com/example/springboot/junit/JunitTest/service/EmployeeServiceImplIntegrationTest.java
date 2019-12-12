@@ -1,6 +1,9 @@
 package com.example.springboot.junit.JunitTest.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +13,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.example.springboot.junit.JunitTest.model.Employee;
 import com.example.springboot.junit.JunitTest.repository.EmployeeRepository;
+import com.example.springboot.junit.JunitTest.utils.Factory;
 
 @RunWith(SpringRunner.class)
 public class EmployeeServiceImplIntegrationTest {
-
+/*
     @Autowired
     private EmployeeService employeeService;
  
@@ -38,9 +42,9 @@ public class EmployeeServiceImplIntegrationTest {
             return new EmployeeServiceImpl();
         }
     }
+ */
  
- 
-/*	
+
 	@MockBean
 	EmployeeServiceImpl employeeService;
 	
@@ -70,5 +74,5 @@ public class EmployeeServiceImplIntegrationTest {
     	 System.out.println("Sonuc4:"+employeeService.ozelMetod());
     	 System.out.println("Sonuc5:"+factory.factoryMethod());
      }
-     */
+     
 }

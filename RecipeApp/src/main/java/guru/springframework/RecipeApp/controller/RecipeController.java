@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import guru.springframework.RecipeApp.commands.RecipeCommand;
+import guru.springframework.RecipeApp.repositories.RecipeRepository;
 import guru.springframework.RecipeApp.services.RecipeService;
 
 /**
@@ -52,4 +53,9 @@ public class RecipeController {
     	return "redirect:/recipe/"+savedCommand.getId()+"/show/";
     }
     
+    @GetMapping("/recipe/{id}/delete")
+    public String deleteRecipe(@PathVariable String id){
+    	recipeService.deleteById(Long.valueOf(id));
+    	return "redirect:/";
+    }
 }

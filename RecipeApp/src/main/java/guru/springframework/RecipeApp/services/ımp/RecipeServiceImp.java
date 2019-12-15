@@ -69,4 +69,10 @@ public class RecipeServiceImp implements RecipeService{
 	    public RecipeCommand findCommandById(Long l) {
 	        return recipeToRecipeCommand.convert(findById(l));
 	    }
+		
+		@Override
+	    @Transactional
+	    public void deleteById(Long l) {
+	        recipeRepository.deleteById(l);
+	    }
 }

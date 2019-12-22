@@ -56,6 +56,7 @@ public class IngredientServiceImp implements IngredientService{
     @Transactional
     public IngredientCommand saveIngredientCommand(IngredientCommand command) {
         Optional<Recipe> recipeOptional = recipeRepository.findById(command.getRecipeId());
+
         if(!recipeOptional.isPresent()){
             log.error("Recipe not found for id: " + command.getRecipeId());
             return new IngredientCommand();
@@ -67,9 +68,9 @@ public class IngredientServiceImp implements IngredientService{
                     .stream()
                     .filter(ingredient -> (""+ingredient.getId()).equals(""+command.getId()))
                     .findFirst();
+        	System.out.println("Log1");
 
             if(ingredientOptional.isPresent()){
-                System.out.println("TEST");
                 Ingredient ingredientFound = ingredientOptional.get();
                 ingredientFound.setDescription(command.getDescription());
                 ingredientFound.setAmount(command.getAmount());
@@ -78,17 +79,40 @@ public class IngredientServiceImp implements IngredientService{
                         .orElseThrow(() -> new RuntimeException("UOM NOT FOUND"))); //todo address this
 
             } else {
+            	System.out.println("Log2");
                 //add new Ingredient
-                recipe.addIngredient(ingredientCommandToIngredient.convert(command));
-            }
+            	Ingredient ingredient = ingredientCommandToIngredient.convert(command);
+            	ingredient.setRecipe(recipe);
+                recipe.addIngredient(ingredient);
+            	System.out.println("Log3");
 
+            }
+            
             Recipe savedRecipe = recipeRepository.save(recipe);
+        	System.out.println("Log4");
+
+            Optional<Ingredient> savedIngredientOptional = savedRecipe.getIngredients().stream()
+                    .filter(recipeIngredients -> (recipeIngredients.getId()+"").equals(""+command.getId()))
+                    .findFirst();
+        	System.out.println("Log5");
+
+            //check by description
+            if(!savedIngredientOptional.isPresent()){
+            	System.out.println("Log6");
+
+                //not totally safe... But best guess
+                savedIngredientOptional = savedRecipe.getIngredients().stream()
+                        .filter(recipeIngredients -> recipeIngredients.getDescription().equals(command.getDescription()))
+                        .filter(recipeIngredients -> recipeIngredients.getAmount().equals(command.getAmount()))
+                        .filter(recipeIngredients -> (recipeIngredients.getUom().getId()+"").equals(""+(command.getUom().getId())))
+                        .findFirst();
+            	System.out.println("Log7");
+
+            }
+        	System.out.println("Log8");
 
             //to do check for fail
-            return ingredientToIngredientCommand.convert(savedRecipe.getIngredients().stream()
-                    .filter(recipeIngredients -> (""+recipeIngredients.getId()).equals(""+command.getId()))
-                    .findFirst()
-                    .get());
+            return ingredientToIngredientCommand.convert(savedIngredientOptional.get());
         }
 
     }

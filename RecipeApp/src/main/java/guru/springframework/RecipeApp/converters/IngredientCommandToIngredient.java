@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import guru.springframework.RecipeApp.commands.IngredientCommand;
 import guru.springframework.RecipeApp.model.Ingredient;
+import guru.springframework.RecipeApp.model.Recipe;
 
 /**
  * Created by jt on 6/21/17.
@@ -25,9 +26,18 @@ public class IngredientCommandToIngredient implements Converter<IngredientComman
         if (source == null) {
             return null;
         }
-
+        
         final Ingredient ingredient = new Ingredient();
-        ingredient.setId(source.getId());
+        
+        if(source.getId() != null)
+        	ingredient.setId(source.getId());
+        
+        if(source.getRecipeId() != null){
+            Recipe recipe = new Recipe();
+            recipe.setId(source.getRecipeId());
+            ingredient.setRecipe(recipe);
+            recipe.addIngredient(ingredient);
+        }
         ingredient.setAmount(source.getAmount());
         ingredient.setDescription(source.getDescription());
         ingredient.setUom(uomConverter.convert(source.getUom()));

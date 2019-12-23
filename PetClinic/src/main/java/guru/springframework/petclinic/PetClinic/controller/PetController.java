@@ -17,6 +17,8 @@ import guru.springframework.petclinic.PetClinic.services.PetTypeService;
 
 import javax.validation.Valid;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * Created by jt on 9/22/18.
@@ -39,6 +41,7 @@ public class PetController {
 
     @ModelAttribute("types")
     public Collection<PetType> populatePetTypes() {
+    	System.out.println("Pet Type Deneme:"+petTypeService.findAll().size());
         return petTypeService.findAll();
     }
 
@@ -52,10 +55,9 @@ public class PetController {
         dataBinder.setDisallowedFields("id");
     }
 
-    @GetMapping("/pets/new")
+	@GetMapping("/pets/new")
     public String initCreationForm(Owner owner, Model model) {
         Pet pet = new Pet();
-        owner.getPets().add(pet);
         pet.setOwner(owner);
         model.addAttribute("pet", pet);
         return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
@@ -63,9 +65,10 @@ public class PetController {
 
     @PostMapping("/pets/new")
     public String processCreationForm(Owner owner, @Valid Pet pet, BindingResult result, ModelMap model) {
-      /*  if (StringUtils.hasLength(pet.getName()) && pet.isNew() && owner.getPet(pet.getName(), true) != null){
+        if (StringUtils.hasLength(pet.getName()) && pet.isNew() && owner.getPet(pet.getName(), true) != null){
             result.rejectValue("name", "duplicate", "already exists");
-        }*/
+        }
+        pet.setOwner(owner);
         owner.getPets().add(pet);
         if (result.hasErrors()) {
             model.put("pet", pet);

@@ -1,5 +1,6 @@
 package guru.springframework.petclinic.PetClinic.services.map;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +89,12 @@ public class OwnerServiceMap extends AbstractMapService<Owner,Long>  implements 
 				.filter(owner -> owner.getLastName().equalsIgnoreCase(lastname))
 				.findFirst()
 				.orElse(null);
+	}
+
+	@Override
+	public List<Owner> findAllByLastNameLike(String lastname) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
